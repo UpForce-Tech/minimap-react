@@ -1,0 +1,43 @@
+{
+  "name": "minimap-react",
+  "version": "1.0.0",
+  "description": "Minimap React Component",
+  "main": "index.js",
+  "scripts": {
+    "watch": "cross-env NODE_ENV=development webpack -w",
+    "build:dev": "cross-env NODE_ENV=development webpack",
+    "build:production": "cross-env NODE_ENV=production webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UpForce-Tech/minimap-react.git"
+  },
+  "keywords": [
+    "minimap",
+    "react-minimap",
+    "component-react-minimap"
+  ],
+  "author": "upforcetech <github@upforcetech.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UpForce-Tech/minimap-react/issues"
+  },
+  "homepage": "https://github.com/UpForce-Tech/minimap-react#readme",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "^6.24.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^5.0.1",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
+  }
+}
