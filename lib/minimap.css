@@ -1,8 +1,24 @@
+.react-minimap-component{
+    position: relative;
+}
+.minimap-treeview{
+    position: fixed;
+    right: 40px;
+    top: 12px;
+    border: 1px solid #eee;
+    width: 100px;
+    height: 465px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 8px;
+}
 .minimap {
     z-index : 10000;
-    position : fixed;
     cursor: pointer;
     font-size: 1em;
+    white-space: nowrap;
+    position: fixed;
+/*    transform-origin: 0 0;*/
 }
 
 .miniregion {
@@ -32,5 +48,13 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+.minimap-overlay {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
 }
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuL21pbmltYXAuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

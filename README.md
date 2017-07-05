@@ -1,6 +1,10 @@
 # Minimap
 A preview of full webpage or its DOM element with flexible positioning and navigation support
 
+#Note
+
+its under development and can not be used in production
+
 ## Installation
 
 To install this Component, run `yarn add minimap-react` or `npm install minimap-react`.
@@ -17,10 +21,7 @@ class App extends Component {
     render() {
         return (
                <Minimap 
-                    heightRatio={0.6}
-                    widthRatio={0.05} 
-                    offsetHeightRatio={0.035} 
-                    offsetWidthRatio={0.035} 
+                    IdName="your div id name"
                     position="right" 
                     smoothScroll={true} 
                     smoothScrollDelay={200} 

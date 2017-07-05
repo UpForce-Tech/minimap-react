@@ -10,14 +10,22 @@ class Minimap extends Component {
         };
     }
     componentDidMount() {
-        const miniElement = document.getElementsByTagName('body')[0];
+        const miniElement = document.getElementById(this.props.IdName);
+        if (typeof (miniElement) === 'undefined' && miniElement === null)
+            return false;
+        let minimapElement = document.createElement('div');
+        minimapElement.className = 'minimap-treeview';
+        document.body.appendChild(minimapElement);
         let cloneDiv = miniElement.cloneNode(true);
-        cloneDiv.className = "minimap noselect";
+        cloneDiv.className = "minimap noselect " + this.props.IdName;
         let miniregion = document.createElement('div');
         miniregion.className = 'miniregion';
         document.body.appendChild(miniregion);
-        document.body.appendChild(cloneDiv);
+        minimapElement.appendChild(cloneDiv);
         let mElement = document.getElementsByClassName('minimap')[0];
+        let minimapOveraly = document.createElement('div');
+        minimapOveraly.className = 'minimap-overlay';
+        mElement.appendChild(minimapOveraly);
         this.onResizeHandler(mElement);
         window.addEventListener('resize', this.onResizeHandler.bind(this, miniElement), false);
         window.addEventListener('scroll', this.onScrollHandler.bind(this), false);
@@ -36,15 +44,19 @@ class Minimap extends Component {
         let hasRegionBody = document.getElementsByClassName('miniregion')[0];
         hasRegionBody.parentNode.removeChild(hasRegionBody);
         hasClassBody.parentNode.removeChild(hasClassBody);
-        const miniElement = document.getElementsByTagName('body')[0];
+        const miniElement = document.getElementById(this.props.IdName);
+        let minimapElement = document.getElementsByClassName('minimap-treeview')[0];
         let cloneDiv = miniElement.cloneNode(miniElement);
-        cloneDiv.className = 'minimap noselect';
+        cloneDiv.className = 'minimap noselect ' + this.props.IdName;
         let miniregion = document.createElement('div');
         miniregion.className = 'miniregion';
         document.body.appendChild(miniregion);
-        miniElement.appendChild(cloneDiv);
-        this.onResizeHandler(this);
+        minimapElement.appendChild(cloneDiv);
         let mElement = document.getElementsByClassName('minimap')[0];
+        let minimapOveraly = document.createElement('div');
+        minimapOveraly.className = 'minimap-overlay';
+        mElement.appendChild(minimapOveraly);
+        this.onResizeHandler(this);
         mElement.addEventListener('mousemove', this.onMouseMoveHandler.bind(this));
         mElement.addEventListener('click', this.onClickHandler.bind(this), false);
         miniregion.addEventListener('mousedown', this.onMouseDownHandler.bind(this), false);
@@ -53,32 +65,53 @@ class Minimap extends Component {
         miniregion.addEventListener('click', this.onClickHandler.bind(this), false);
     }
     onResizeHandler(e) {
-        const {offsetHeightRatio, offsetWidthRatio, widhtRatio, heightRatio, style, position,toggle} = this.props;
-        if(!toggle) return false;
+        const {offsetHeightRatio, offsetWidthRatio, widthRatio, heightRatio, style, position, toggle} = this.props;
+        if (!toggle)
+            return false;
         const minimap = document.getElementsByClassName('minimap')[0];
+        const minimapOverlay = document.getElementsByClassName('minimap-overlay')[0];
+        const minimapTree = document.getElementsByClassName('minimap-overlay')[0];
         let scale = this.scale(e);
-        let animation = 'scale(' + scale.x + ',' + scale.y + ')';
-        let offsetHeight = document.documentElement.clientHeight * offsetHeightRatio;
-        let offsetWidth = document.documentElement.clientWidth * offsetWidthRatio;
-        let top = minimap.clientHeight * (scale.y - 1) / 2 + offsetHeight;
-        let leftRight = minimap.clientWidth * (scale.x - 1) / 2 + offsetWidth;
-        let width = document.documentElement.clientWidth * (1 / scale.x) * widhtRatio;
-        let height = document.documentElement.clientHeight * (1 / scale.y) * heightRatio;
-
-        let styles = {
-            '-webkit-transform': animation,
-            '-moz-transform': animation,
-            '-ms-transform': animation,
-            '-o-transform': animation,
-            transforn: animation,
-            width: width + 'px',
-            height: height + 'px',
-            margin: '0px',
-            padding: '0px',
-            top: top + 'px'
-        };
-        styles[position] = leftRight + 'px';
+        let animation, width, height, top, leftRight, styles, minimapHeight = minimap.clientHeight - 10,
+                offsetHeight = document.documentElement.clientHeight * offsetHeightRatio,
+                offsetWidth = document.documentElement.clientWidth * offsetWidthRatio;
+        width = document.documentElement.clientWidth * (1 / scale.x) * widthRatio;
+        height = document.documentElement.clientHeight * (1 / scale.y) * heightRatio;
+        top = minimap.clientHeight * (scale.y - 1) / 2 + offsetHeight;
+        leftRight = minimap.clientWidth * (scale.x - 1) / 2 + offsetWidth;
+        if (document.body.scrollHeight > document.body.clientHeight) {
+            animation = 'scale3d(0.4,0.4,1)';
+            styles = {
+                '-webkit-transform': animation,
+                '-moz-transform': animation,
+                '-ms-transform': animation,
+                '-o-transform': animation,
+                transforn: animation,
+                width: width + 'px',
+                height: height + 'px',
+                margin: '0px',
+                padding: '0px',
+                'transform-origin': '0% 0%'
+            };
+        } else {
+            animation = 'scale3d(' + scale.x + ',' + scale.y + ',1)';
+            styles = {
+                '-webkit-transform': animation,
+                '-moz-transform': animation,
+                '-ms-transform': animation,
+                '-o-transform': animation,
+                transforn: animation,
+                width: width + 'px',
+                height: height + 'px',
+                margin: '0px',
+                padding: '0px',
+                top: top + 'px'
+            };
+            styles[position] = leftRight + 'px';
+        }
+        Object.assign(minimapTree.style, {height: minimapHeight + 'px', width: width + 'px'});
         Object.assign(minimap.style, this._mergeStyles(styles, style));
+        Object.assign(minimapOverlay.style, {height: height + 'px', width: width + 'px'});
         this._miniRegion(e);
     }
     onScrollHandler() {
@@ -127,35 +160,43 @@ class Minimap extends Component {
         this.setState({mousedown: false});
     }
     scale() {
-        const {widhtRatio, heightRatio} = this.props;
+        const {widthRatio, heightRatio} = this.props;
         let documentElement = document.documentElement, minimap = document.getElementsByClassName('minimap')[0];
         return {
-            x: (documentElement.clientWidth / minimap.clientWidth) * widhtRatio,
+            x: (documentElement.clientWidth / minimap.clientWidth) * widthRatio,
             y: (documentElement.clientHeight / minimap.clientHeight) * heightRatio
         };
+    }
+    onScrollChecker(element) {
+        return document.getElementById(element).scrollHeight > document.getElementById(element).clientHeight;
     }
     _mergeStyles(...args) {
         return Object.assign({}, ...args);
     }
     _miniRegion() {
-        if(document.body.scrollHeight > document.body.clientHeight) return false;
+        if (document.body.scrollHeight > document.body.clientHeight){
+            Object.assign(document.getElementsByClassName('miniregion')[0].style,{display:'none'});
+            return false;
+        }
         const {offsetHeightRatio, offsetWidthRatio, position, style} = this.props;
         const minimap = document.getElementsByClassName('minimap')[0].getBoundingClientRect();
         let scale = this.scale();
         let regionTop = minimap.top * scale.y;
-        let offsetWidth = document.documentElement.clientWidth * offsetWidthRatio;
+        let offsetWidth = document.documentElement.clientWidth * offsetWidthRatio - 5;
         let styles = {
-            width: document.getElementsByClassName('minimap')[0].offsetWidth * scale.x + 'px',
+            width: (document.getElementsByClassName('minimap')[0].offsetWidth * scale.x) + 15 + 'px',
             height: window.innerHeight * scale.y + 'px',
             margin: '0px',
-            top: window.pageYOffset * scale.y + document.documentElement.clientHeight * offsetHeightRatio - regionTop + 'px'
+            top: window.pageYOffset * scale.y + document.documentElement.clientHeight * offsetHeightRatio - regionTop + 'px',
+            display:'block'
         };
         styles[position] = offsetWidth + 'px';
-        Object.assign(document.getElementsByClassName('miniregion')[0].style, this._mergeStyles(styles, style))
+        Object.assign(document.getElementsByClassName('miniregion')[0].style, this._mergeStyles(styles, style));
     }
     _scrollTop(e) {
-        const {offsetHeightRatio,toggle,smoothScrollDelay,smoothScroll} = this.props;
-        if(!toggle) return false;
+        const {offsetHeightRatio, toggle, smoothScrollDelay, smoothScroll} = this.props;
+        if (!toggle)
+            return false;
         const minimap = document.getElementsByClassName('minimap')[0].getBoundingClientRect();
         let scale = this.scale();
         let offsetHeight = document.documentElement.clientHeight * offsetHeightRatio;
@@ -219,14 +260,14 @@ class Minimap extends Component {
         }
     }
     render() {
-        return <div></div> ;
+        return <div></div>;
     }
 }
 Minimap.defaultProps = {
     heightRatio: 0.6,
-    widhtRatio: 0.05,
-    offsetHeightRatio: 0.035,
-    offsetWidthRatio: 0.035,
+    widthRatio: 0.07,
+    offsetHeightRatio: 0.038,
+    offsetWidthRatio: 0.032,
     position: 'right',
     smoothScroll: true,
     smoothScrollDelay: 200,
@@ -234,12 +275,13 @@ Minimap.defaultProps = {
 };
 Minimap.propTypes = {
     heightRatio: PropTypes.number,
-    widhtRatio: PropTypes.number,
+    widthRatio: PropTypes.number,
     offsetHeightRatio: PropTypes.number,
     offsetWidthRatio: PropTypes.number,
     position: PropTypes.string,
     smoothScroll: PropTypes.bool,
     smoothScrollDelay: PropTypes.number,
-    toggle: PropTypes.bool
+    toggle: PropTypes.bool,
+    IdName: PropTypes.string.isRequired
 };
 export default Minimap;
