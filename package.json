@@ -1,6 +1,6 @@
 {
   "name": "minimap-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Minimap React Component",
   "main": "lib/minimap.js",
   "scripts": {
