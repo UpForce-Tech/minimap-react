@@ -10,6 +10,13 @@ class Minimap extends Component {
         };
     }
     componentDidMount() {
+        if (!this.props.IdName) {
+            console.error('Warning: Undefined Html DOM Id.');
+            return false;
+        } else if (document.getElementById(this.props.IdName) === null) {
+            console.error("Warning: can't find the specific id in your DOM");
+            return false;
+        }
         const miniElement = document.getElementById(this.props.IdName);
         if (typeof (miniElement) === 'undefined' && miniElement === null)
             return false;
@@ -40,6 +47,13 @@ class Minimap extends Component {
     }
 
     componentDidUpdate() {
+        if (!this.props.IdName) {
+            console.error('Warning: Undefined Html DOM Id.');
+            return false;
+        } else if (document.getElementById(this.props.IdName) === null) {
+            console.error("Warning: can't find the specific id in your DOM");
+            return false;
+        }
         let hasClassBody = document.getElementsByClassName('minimap')[0];
         let hasRegionBody = document.getElementsByClassName('miniregion')[0];
         hasRegionBody.parentNode.removeChild(hasRegionBody);
@@ -174,8 +188,8 @@ class Minimap extends Component {
         return Object.assign({}, ...args);
     }
     _miniRegion() {
-        if (document.body.scrollHeight > document.body.clientHeight){
-            Object.assign(document.getElementsByClassName('miniregion')[0].style,{display:'none'});
+        if (document.body.scrollHeight > document.body.clientHeight) {
+            Object.assign(document.getElementsByClassName('miniregion')[0].style, {display: 'none'});
             return false;
         }
         const {offsetHeightRatio, offsetWidthRatio, position, style} = this.props;
@@ -188,7 +202,7 @@ class Minimap extends Component {
             height: window.innerHeight * scale.y + 'px',
             margin: '0px',
             top: window.pageYOffset * scale.y + document.documentElement.clientHeight * offsetHeightRatio - regionTop + 'px',
-            display:'block'
+            display: 'block'
         };
         styles[position] = offsetWidth + 'px';
         Object.assign(document.getElementsByClassName('miniregion')[0].style, this._mergeStyles(styles, style));
