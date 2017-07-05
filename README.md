@@ -1,7 +1,7 @@
 # Minimap
 A preview of full webpage or its DOM element with flexible positioning and navigation support
 
-#Note
+## Note
 
 its under development and can not be used in production
 
