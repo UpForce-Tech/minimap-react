@@ -2,8 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Build_dir = path.resolve(__dirname, 'lib');
-const App_dir = path.resolve(__dirname, 'src');
+const Build_dir = path.resolve(__dirname, 'example/assets');
+const App_dir = path.resolve(__dirname, 'example/src');
 
 const WebpackConfig = {
 
@@ -13,7 +13,7 @@ const WebpackConfig = {
 
     output: {
         path: Build_dir,
-        filename: 'react-minimap.js',
+        filename: 'index.js',
         library: 'minimap-react',
         libraryTarget: 'umd',
     },
@@ -35,9 +35,9 @@ const WebpackConfig = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("./react-minimap.css"),
+        new ExtractTextPlugin("./index.css"),
         new webpack.optimize.UglifyJsPlugin({
-            exclude: ['minimap-react.js'],
+            exclude: ['index.js'],
             minimize: false,
             compress: {
                 warnings: false

@@ -13,17 +13,17 @@ const AppRoute = () => (
             <div className="container-fluid">
                 <div className="container">
                     <ul className="nav navbar-nav">
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/blog">Blog</Link></li>
-                        <li><Link to="/gallary">Gallary</Link></li>
+                        <li><Link to="/minimap-react/">Home</Link></li>
+                        <li><Link to="/minimap-react/blog">Blog</Link></li>
+                        <li><Link to="/minimap-react/gallary">Gallary</Link></li>
                     </ul>
                 </div>
             </div>
         </nav>  
         <div className="container">
-          <Route exact path="/" component={App}/>
-          <Route path="/blog" component={Blog}/>
-          <Route path="/gallary" component={Gallary}/>
+          <Route exact path="/minimap-react/" component={App}/>
+          <Route path="/minimap-react/blog" component={Blog}/>
+          <Route path="/minimap-react/gallary" component={Gallary}/>
         </div>
     </div>
   </Router>
