@@ -115,7 +115,7 @@ return(
             
         </div>
     <Minimap 
-        IdName="root"
+        rootId="root"
         position="right" 
         smoothScroll={true} 
         smoothScrollDelay={200} 

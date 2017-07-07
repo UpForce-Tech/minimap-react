@@ -112,7 +112,7 @@ import React, {Component} from 'react';
         </div>
     </div>
     <Minimap 
-        IdName="root"
+        rootId="root"
         position="right" 
         smoothScroll={true} 
         smoothScrollDelay={200} 

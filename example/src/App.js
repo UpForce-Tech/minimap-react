@@ -301,7 +301,7 @@ class CompanyPeople extends Component {
                             onToggle={this.onToggle}
                             />
                         <Minimap 
-                            IdName="root"
+                            rootId="root"
                             position="right" 
                             smoothScroll={true} 
                             smoothScrollDelay={200} 
