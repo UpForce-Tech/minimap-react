@@ -1,0 +1,187 @@
+.react-minimap-component{
+    position: relative;
+}
+.minimap-treeview{
+    position: fixed;
+    right: 40px;
+    top: 0px;
+    border: 1px solid #eee;
+    width: 135px;
+    height: 720px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 8px;
+}
+.minimap {
+    z-index : 10000;
+    cursor: pointer;
+    font-size: 1em;
+    white-space: nowrap;
+/*    position: fixed;*/
+    transform-origin: 0 0;
+}
+
+.miniregion {
+    z-index : 10001;
+    position : fixed;
+    background : #000;
+    opacity: 0.2;
+    border: 2px solid silver;
+    cursor: pointer;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+}
+
+.miniregion.dragging {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+}
+
+.miniregion:hover {
+    box-shadow: 0 0 0.4em darkgrey;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.minimap-overlay {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    z-index: 1;
+    top: 0px;
+    left: -25px;
+}
+
+
+/* the tree node's style */
+.tree-view, .tree-view ul{
+    font: normal normal 14px/20px Helvetica, Arial, sans-serif;  
+    list-style-type: none;
+    margin: 0 0 0 10px;
+    padding: 0;
+    position: relative;   
+
+}
+.tree-view li{
+    margin: 0;
+    padding: 0 12px;  
+    position: relative;  
+    display: table;
+}
+
+.tree-view li::before, .tree-view li::after{
+    content: '';
+    position: absolute;
+    left: 0;
+}
+
+.tree-view > li li::before, .tree-view > li li::after{
+    content: '';
+    position: absolute;
+    left: -3px;
+}
+/* horizontal line on inner list items */
+.tree-view li::before{
+    border-top: 1px dotted #999;
+    top: 25.5px;
+    width: 15px;
+    height: 0;    
+}
+.tree-view .tree-view_item > .tree-view-item_node {
+    margin: 15px 0 15px;
+}
+
+/* vertical line on list items */   
+.tree-view > li li:after{
+    border-left: 1px dotted #999;
+    height: 100%;
+    width: 0px;
+    top: 26px; 
+}
+
+/* lower line on list items from the first level because they don't have parents */
+.tree-view > li::after{
+    border-left: 1px dotted #999;
+    height: 100%;
+    width: 0px;
+    top: 26px;
+}
+
+/* hide line from the last of the first level list items */
+.tree-view > li:last-child::after{
+    display: none;
+}
+.tree-view > li li:last-child::after{
+    display: none;
+}
+
+
+/* style for the children nodes container */
+
+
+.tree-view_arrow {
+    cursor: pointer;
+    margin-right: 5px;
+    display: inline-block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+    background: #fff;
+}
+.tree-view_arrow::before, .tree-view_arrow::after{
+    content: '';
+    position: absolute;
+    left: 7px;
+    z-index: -999;
+}
+.tree-view_arrow::before{
+    border-top: 1px dotted #999;
+    top: 10.5px;
+    width: 12px;
+    height: 0;    
+}
+.tree-view_arrow.tree-view_arrow-collapsed::after{
+    border-left: 1px dotted #999;
+    height: 40px;
+    width: 0px;
+    top: 20px;  
+}
+/* rotate the triangle to close it */
+
+.node {
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    border-radius: 1px;
+    background: #fff;
+    text-transform: capitalize;
+    border: 1px solid #999;
+    padding: 10px 15px;
+    box-shadow: 1px 1px 1px 1px #dddddd;
+}
+
+.node:hover {
+    background-color: rgb(220, 245, 243);
+    cursor: pointer;
+}
+
+.node {
+    font: 14px Helvetica, Arial, sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuL2luZGV4LmNzcyIsInNvdXJjZVJvb3QiOiIifQ==*/

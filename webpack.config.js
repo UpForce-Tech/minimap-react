@@ -13,7 +13,7 @@ const WebpackConfig = {
 
     output: {
         path: Build_dir,
-        filename: '[name].js',
+        filename: 'react-minimap.js',
         library: 'minimap-react',
         libraryTarget: 'umd',
     },
@@ -35,7 +35,7 @@ const WebpackConfig = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("./[name].css"),
+        new ExtractTextPlugin("./react-minimap.css"),
         new webpack.optimize.UglifyJsPlugin({
             exclude: ['minimap-react.js'],
             minimize: false,

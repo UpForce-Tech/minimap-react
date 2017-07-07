@@ -2,7 +2,7 @@
   "name": "minimap-react",
   "version": "1.0.3",
   "description": "Minimap React Component",
-  "main": "lib/minimap.js",
+  "main": "lib/react-minimap.js",
   "scripts": {
     "watch": "cross-env NODE_ENV=development webpack -w",
     "build:dev": "cross-env NODE_ENV=development webpack",
