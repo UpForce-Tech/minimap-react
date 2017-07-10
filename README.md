@@ -1,6 +1,8 @@
 # Minimap
 A preview of full webpage or its DOM element with flexible positioning and navigation support
 
+[DEMO](https://upforce-tech.github.io/minimap-react/)
+
 ## Note
 
 its under development and can not be used in production
