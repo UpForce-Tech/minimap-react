@@ -1,5 +1,7 @@
 .react-minimap-component{
     position: relative;
+    width: 100%;
+    float: left;
 }
 .minimap-treeview{
     position: fixed;
@@ -16,7 +18,7 @@
     z-index : 10000;
     cursor: pointer;
     font-size: 1em;
-    white-space: nowrap;
+/*    white-space: nowrap;*/
 /*    position: fixed;*/
     transform-origin: 0 0;
 }

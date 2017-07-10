@@ -4,7 +4,7 @@ import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
 import App from './App';
 import Gallary from './Gallary.js';
 import Blog from './Blog.js';
-
+import registerServiceWorker from './registerServiceWorker';
 
 const AppRoute = () => (
   <Router>

@@ -51,7 +51,6 @@ class Minimap extends Component {
         minimapElement.addEventListener('click', this.onClickHandler.bind(this), false);
     }
     componentDidUpdate() {
-        console.log('update');
         let hasClassBody = document.getElementsByClassName('minimap')[0];
         let hasRegionBody = document.getElementsByClassName('miniregion')[0];
         hasRegionBody.parentNode.removeChild(hasRegionBody);
@@ -91,22 +90,22 @@ class Minimap extends Component {
         height = document.getElementById(this.props.rootId).clientHeight * (1 / scale.y) * heightRatio;
         top = minimap.clientHeight * (scale.y - 1) / 2 + offsetHeight;
         leftRight = minimap.clientWidth * (scale.x - 1) / 2 + offsetWidth;
-        let Right = document.documentElement.clientWidth * offsetWidthRatio+2;
-        if (document.body.scrollHeight > document.getElementById(this.props.rootId).clientHeight) {
-            animation = 'scale3d(0.12,0.12,1)';
-            styles = {
-                '-webkit-transform': animation,
-                '-moz-transform': animation,
-                '-ms-transform': animation,
-                '-o-transform': animation,
-                transforn: animation,
-                width: width + 'px',
-                height: height + 'px',
-                margin: '0px',
-                padding: '0px',
-                'transform-origin': '-35px 0%'
-            };
-        } else {
+        let Right = document.documentElement.clientWidth * offsetWidthRatio + 2;
+//        if (document.body.scrollHeight > document.getElementById(this.props.rootId).clientHeight) {
+//            animation = 'scale3d(0.12,0.12,1)';
+//            styles = {
+//                '-webkit-transform': animation,
+//                '-moz-transform': animation,
+//                '-ms-transform': animation,
+//                '-o-transform': animation,
+//                transforn: animation,
+//                width: width + 'px',
+//                height: height + 'px',
+//                margin: '0px',
+//                padding: '0px',
+//                'transform-origin': '-35px 0%'
+//            };
+//        } else {
             animation = 'scale3d(' + scale.x + ',' + scale.y + ',1)';
             styles = {
                 '-webkit-transform': animation,
@@ -120,13 +119,13 @@ class Minimap extends Component {
                 padding: '0px',
                 top: top + 'px'
             };
-            styles[position] = leftRight + 'px';
-        }
+            //styles[position] = leftRight + 'px';
+       // }
         
         Object.assign(minimap.style, this._mergeStyles(styles, style));
         Object.assign(minimapOverlay.style, {height: height + 'px', width: '475px'});
-        let treeStyle = {height: document.documentElement.clientHeight+ 'px', width:(width/(2/scale.x) * 3 - 34) + 'px'};
-        treeStyle[position] = Right + 'px';
+        let treeStyle = {height: document.documentElement.clientHeight+ 'px', width:(width/(2/scale.x) * 5 / 2) + 'px'};
+        treeStyle[position] = '5px';
         Object.assign(minimapTree.style, this._mergeStyles(treeStyle, style));
         this._miniRegion(e);
     }
@@ -195,13 +194,12 @@ class Minimap extends Component {
         const minimap = document.getElementsByClassName('minimap')[0].getBoundingClientRect();
         let scale = this.scale();
         let regionTop = minimap.top * scale.y;
-        let offsetWidth = document.documentElement.clientWidth * offsetWidthRatio;
-        let width = document.getElementsByClassName('minimap-treeview')[0].clientWidth + 6;
-        if (document.body.scrollHeight > document.getElementById(this.props.rootId).clientHeight) {
-            Object.assign(document.getElementsByClassName('miniregion')[0].style, {width: '138px', height: '125px', top: '15px', right: offsetWidth + 'px'});
-            return false;
-        }
-        console.log(document.getElementsByClassName('minimap-treeview')[0].clientWidth);
+        let offsetWidth = document.documentElement.clientWidth * offsetWidthRatio + 4;
+        let width = document.getElementsByClassName('minimap-treeview')[0].clientWidth + 4;
+//        if (document.body.scrollHeight > document.getElementById(this.props.rootId).clientHeight) {
+//            Object.assign(document.getElementsByClassName('miniregion')[0].style, {width: '138px', height: '125px', top: '15px', right: offsetWidth + 'px'});
+//            return false;
+//        }
         let styles = {
             width:  width  + 'px',
             height: window.innerHeight * scale.y + 'px',
@@ -234,14 +232,14 @@ class Minimap extends Component {
             let unitDelay = 4;
 
             if (r >= 4) {
-                unitDelay = parseInt(unitScroll, 10);
+                unitDelay = parseInt(unitScroll, 15);
             } else if (r >= 1) {
-                unitScroll = parseInt(r, 10) * 4;
+                unitScroll = parseInt(r, 15) * 4;
             } else {
-                unitScroll = (4 / r);
+                unitScroll = parseInt((4 / r),15);
             }
             let next = current;
-            let count = parseInt(distance / unitScroll, 15);
+            let count = parseInt(distance / unitScroll,8);
             var smoothScrolling = () => {
                 next = next + (direction ? unitScroll : -unitScroll);
                 if (--count <= 0) {
@@ -286,7 +284,7 @@ Minimap.defaultProps = {
     heightRatio: 0.1,
     widthRatio: 0.07,
     offsetHeightRatio: 0.010,
-    offsetWidthRatio: 0.024,
+    offsetWidthRatio: 0.0,
     position: 'right',
     smoothScroll: true,
     smoothScrollDelay: 200,
