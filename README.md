@@ -21,7 +21,7 @@ class App extends Component {
     render() {
         return (
                <Minimap 
-                    IdName="your div id name"
+                    rootId="your div id name"
                     position="right" 
                     smoothScroll={true} 
                     smoothScrollDelay={200} 
