@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
 import './component/minimap.css';
 
 class Minimap extends Component {
@@ -24,6 +23,7 @@ class Minimap extends Component {
         const miniElement = document.getElementById(this.props.rootId);
         if (typeof (miniElement) === 'undefined' && miniElement === null)
             return false;
+        miniElement.className="react-minimap-component";
         let minimapElement = document.createElement('div');
         minimapElement.className = 'minimap-treeview';
         document.body.appendChild(minimapElement);
@@ -104,6 +104,7 @@ class Minimap extends Component {
                 padding: '0px',
                 top: top + 'px'
             };
+        
         Object.assign(minimap.style, this._mergeStyles(styles, style));
         Object.assign(minimapOverlay.style, {height: height + 'px', width: '475px'});
         let treeStyle = {height: document.documentElement.clientHeight+ 'px', width:(width/(2/scale.x) * 5 / 2) + 'px'};
@@ -178,6 +179,7 @@ class Minimap extends Component {
         let regionTop = minimap.top * scale.y;
         let offsetWidth = document.documentElement.clientWidth * offsetWidthRatio + 4;
         let width = document.getElementsByClassName('minimap-treeview')[0].clientWidth + 4;
+
         let styles = {
             width:  width  + 'px',
             height: window.innerHeight * scale.y + 'px',
