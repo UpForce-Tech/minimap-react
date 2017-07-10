@@ -14,7 +14,7 @@ to use this component in your project, just add the following
 
 ```javascript
 import React from 'react';
-import Minimap from 'minimap';
+import Minimap from 'react-minimap';
 import "minimap-react/lib/react-minimap.css";
 
 class App extends Component {
