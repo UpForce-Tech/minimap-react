@@ -1,7 +1,7 @@
 # Minimap
 A preview of full webpage or its DOM element with flexible positioning and navigation support
 
-[DEMO](https://upforce-tech.github.io/minimap-react/)
+[*****DEMO*****](https://upforce-tech.github.io/minimap-react/)
 
 ## Note
 
